@@ -1,37 +1,30 @@
-<div id="<%= dom_id @location %>">
-  <p>
-    <strong>City name:</strong>
-    <%= @location.City_name %>
-  </p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <h2><%= @location.City_name %></h2>
+      <p><strong>Country name:</strong> <%= @location.Country_name %></p>
+      <p><strong>When:</strong> <%= @location.When %></p>
 
-  <p>
-    <strong>Country name:</strong>
-    <%= @location.Country_name %>
-  </p>
+      <div class="d-flex justify-content-between align-items-center mt-2 mb-4">
+        <div>
+          <%= link_to 'Edit this location', edit_location_path(@location), class: 'btn btn-outline-secondary mr-2' %>
+          <%= link_to 'Back to locations', locations_path, class: 'btn btn-outline-secondary' %>
+        </div>
+        <%= button_to 'Destroy this location', @location, method: :delete, class: 'btn btn-outline-danger' %>
+      </div>
 
-  <p>
-    <strong>When:</strong>
-    <%= @location.When %>
-  </p>
-</div>
+      <h3 class="mt-4">Articles</h3>
 
-<div>
-  <%= link_to "Edit this location", edit_location_path(@location) %> |
-  <%= link_to "Back to locations", locations_path %>
+      <% @location.articles.each do |article| %>
+        <div class="border rounded p-3 mt-3">
+          <h4><%= article.title %></h4>
+          <p><%= article.description %></p>
+          <p><small class="text-muted"><%= article.date %></small></p>
+          <%= link_to 'Delete Article', location_article_path(@location, article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+        </div>
+      <% end %>
 
-  <%= button_to "Destroy this location", @location, method: :delete %>
-</div>
-
-
-<h2>Articles</h2>
-
-<% @location.articles.each do |article| %>
-  <div>
-    <h3><%= article.title %></h3>
-    <p><%= article.description %></p>
-    <p><%= article.date %></p>
-    <%= link_to 'Delete Article', location_article_path(@location, article), method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'New Article', new_location_article_path(@location), class: 'btn btn-outline-secondary mt-3' %>
+    </div>
   </div>
-<% end %>
-
-<%= link_to 'New Article', new_location_article_path(@location) %>
+</div>
