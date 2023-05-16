@@ -1,0 +1,32 @@
+<%= form_with(model: location) do |form| %>
+  <% if location.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+        <% location.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :City_name, style: "display: block" %>
+    <%= form.text_field :City_name %>
+  </div>
+
+  <div>
+    <%= form.label :Country_name, style: "display: block" %>
+    <%= form.text_field :Country_name %>
+  </div>
+
+  <div>
+    <%= form.label :When, style: "display: block" %>
+    <%= form.date_field :When %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
