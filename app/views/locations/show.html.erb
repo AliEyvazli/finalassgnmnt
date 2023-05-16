@@ -20,7 +20,7 @@
           <h4><%= article.title %></h4>
           <p><%= article.description %></p>
           <p><small class="text-muted"><%= article.date %></small></p>
-          <%= link_to 'Delete Article', location_article_path(@location, article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+<%= button_to 'Delete Article', location_article_path(@location, article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
         </div>
       <% end %>
 

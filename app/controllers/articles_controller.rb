@@ -16,9 +16,14 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = @location.articles.find(params[:id])
-    @article.destroy
-    redirect_to @location, notice: 'Article was successfully destroyed.'
+    if @article
+      @article.destroy
+      redirect_to @location, notice: 'Article was successfully destroyed.'
+    else
+      redirect_to @location, notice: 'Article not found.'
+    end
   end
+  
 
   private
 
