@@ -21,3 +21,17 @@
 
   <%= button_to "Destroy this location", @location, method: :delete %>
 </div>
+
+
+<h2>Articles</h2>
+
+<% @location.articles.each do |article| %>
+  <div>
+    <h3><%= article.title %></h3>
+    <p><%= article.description %></p>
+    <p><%= article.date %></p>
+    <%= link_to 'Delete Article', location_article_path(@location, article), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>
+
+<%= link_to 'New Article', new_location_article_path(@location) %>
