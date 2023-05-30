@@ -13,6 +13,11 @@
         <%= button_to 'Destroy this location', @location, method: :delete, class: 'btn btn-outline-danger' %>
       </div>
 
+
+      <% if user_signed_in? %>
+        <%= link_to 'New Article', new_location_article_path(@location), class: 'btn btn-outline-secondary mt-3' %>
+      <% end %>
+
       <h3 class="mt-4">Articles</h3>
 
       <% @location.articles.each do |article| %>
@@ -20,11 +25,13 @@
           <h4><%= article.title %></h4>
           <p><%= article.description %></p>
           <p><small class="text-muted"><%= article.date %></small></p>
-<%= button_to 'Delete Article', location_article_path(@location, article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+
+          <% if user_signed_in? %>
+            <%= button_to 'Delete Article', location_article_path(@location, article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+          <% end %>
         </div>
       <% end %>
 
-      <%= link_to 'New Article', new_location_article_path(@location), class: 'btn btn-outline-secondary mt-3' %>
     </div>
   </div>
 </div>

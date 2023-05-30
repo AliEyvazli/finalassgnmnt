@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_location
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
 
   def new
     @article = @location.articles.build
@@ -23,7 +24,6 @@ class ArticlesController < ApplicationController
       redirect_to @location, notice: 'Article not found.'
     end
   end
-  
 
   private
 
