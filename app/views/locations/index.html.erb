@@ -13,6 +13,7 @@
         <th>City</th>
         <th>Country</th>
         <th>Date</th>
+        <th>User Id</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
           <td><%= link_to location.City_name, location %></td> <!-- City names are now clickable -->
           <td><%= location.Country_name %></td>
           <td><%= location.When %></td>
+          <td><%= location.user_id %></td>
         </tr>
       <% end %>
     </tbody>

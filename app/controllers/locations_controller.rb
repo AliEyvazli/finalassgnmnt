@@ -1,5 +1,7 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: %i[ show edit update destroy ]
+  before_action :set_location, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /locations
   def index
@@ -13,7 +15,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/new
   def new
-    @location = Location.new
+    @location = current_user.locations.build
   end
 
   # GET /locations/1/edit
@@ -22,7 +24,7 @@ class LocationsController < ApplicationController
 
   # POST /locations
   def create
-    @location = Location.new(location_params)
+    @location = current_user.locations.build(location_params)
 
     if @location.save
       redirect_to @location, notice: "Location was successfully created."
@@ -46,14 +48,20 @@ class LocationsController < ApplicationController
     redirect_to locations_url, notice: "Location was successfully destroyed."
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_location
-      @location = Location.find(params[:id])
-    end
+  def correct_user
+    @location = current_user.locations.find_by(id: params[:id])
+    redirect_to location_path, notice: "Not Authorized To Edit This Location" if @location.nil?
+  end
 
-    # Only allow a list of trusted parameters through.
-    def location_params
-      params.require(:location).permit(:City_name, :Country_name, :When, :uder_id)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_location
+    @location = Location.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def location_params
+    params.require(:location).permit(:City_name, :Country_name, :When, :user_id)
+  end
 end
