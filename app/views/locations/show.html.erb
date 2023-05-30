@@ -13,24 +13,29 @@
         <%= button_to 'Destroy this location', @location, method: :delete, class: 'btn btn-outline-danger' %>
       </div>
 
-
       <% if user_signed_in? %>
         <%= link_to 'New Article', new_location_article_path(@location), class: 'btn btn-outline-secondary mt-3' %>
       <% end %>
 
       <h3 class="mt-4">Articles</h3>
 
-      <% @location.articles.each do |article| %>
-        <div class="border rounded p-3 mt-3">
-          <h4><%= article.title %></h4>
-          <p><%= article.description %></p>
-          <p><small class="text-muted"><%= article.date %></small></p>
+      <div class="row">
+        <% @location.articles.each_slice(3) do |articles| %>
+          <% articles.each do |article| %>
+            <div class="col-md-4">
+              <div class="border rounded p-3 mt-3">
+                <h4><%= article.title %></h4>
+                <p><%= article.description %></p>
+                <p><small class="text-muted"><%= article.date %></small></p>
 
-          <% if user_signed_in? %>
-            <%= button_to 'Delete Article', location_article_path(@location, article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+                <% if user_signed_in? %>
+                  <%= button_to 'Delete Article', location_article_path(@location, article), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+                <% end %>
+              </div>
+            </div>
           <% end %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
 
     </div>
   </div>
