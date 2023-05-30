@@ -18,12 +18,15 @@
     </thead>
     <tbody>
       <% @locations.each do |location| %>
+
+      <% if location.user == current_user %>
         <tr>
-          <td><%= link_to location.City_name, location %></td> <!-- City names are now clickable -->
+          <td><%= link_to location.City_name, location %></td> 
           <td><%= location.Country_name %></td>
           <td><%= location.When %></td>
           <td><%= location.user_id %></td>
         </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
