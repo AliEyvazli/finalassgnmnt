@@ -24,6 +24,11 @@
           <% articles.each do |article| %>
             <div class="col-md-4">
               <div class="border rounded p-3 mt-3">
+                <% if article.image.attached? %>
+                  <%= image_tag article.image.variant(resize: '300x200'), class: 'img-fluid' %>
+                <% else %>
+                  <%= image_tag 'default_image.png', class: 'placeholder-image img-fluid' %>
+                <% end %>
                 <h4><%= article.title %></h4>
                 <p><%= article.description %></p>
                 <p><small class="text-muted"><%= article.date %></small></p>
