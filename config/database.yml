@@ -22,4 +22,7 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: ali-tacos_production
+  username: ali-tacos
+  password: <% ENV["ALI-TACOS_DATABASE_PASSWORD"]%>
